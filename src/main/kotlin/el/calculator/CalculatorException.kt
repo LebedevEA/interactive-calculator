@@ -5,7 +5,7 @@ import java.lang.Exception
 abstract class CalculatorException(message: String) : Exception(message)
 
 class VariableNotDeclaredException(variableName: String) : CalculatorException(
-    """"Variable "$variableName" is not declared"""
+    """Variable "$variableName" is not declared"""
 )
 
 class DivisionByZeroException : CalculatorException(
