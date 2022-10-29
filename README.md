@@ -12,7 +12,7 @@ Example of interaction with the calculator:
 >>> x
 2
 ```
-# Running
+### Running
 This project is ran by gradle, which requires JDK 6 or later. To run project on linux-like systems type 
 `./gradlew -q run --console=plain` in terminal (it can take a couple of seconds to start, because this command will 
 also compile the project).
