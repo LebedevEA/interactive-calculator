@@ -42,14 +42,31 @@ class CommandParsingTest {
             ),
             "let abc = 0" to declare("abc", int(0)),
         ).map { Arguments.of(it.first, it.second) }
-    }
 
-    // TODO: failing
+        @JvmStatic
+        fun invalidCommands() = listOf(
+            "let mut x = 3",
+            "let x",
+            "3x",
+            "((x)",
+            "-+3",
+            "2 ^ 2",
+            "33 + (17 -) 2"
+        ).map { Arguments.of(it) }
+    }
 
     @ParameterizedTest
     @MethodSource("commandTextToAst")
     fun `test parser works correctly`(input: String, expectedAst: Command) {
         val actualAst = DefaultCommandGrammar.parse(input)
         Assertions.assertEquals(expectedAst, actualAst)
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidCommands")
+    fun `test parser throws if command is invalid`(input: String) {
+        Assertions.assertThrowsExactly(ParsingException::class.java) {
+            DefaultCommandGrammar.parse(input)
+        }
     }
 }
